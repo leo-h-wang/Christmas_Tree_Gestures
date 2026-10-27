@@ -1,0 +1,118 @@
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #03050c;
+  color: #e8ecf5;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+}
+
+#scene {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+}
+
+body.hovering #scene { cursor: pointer; }
+
+/* ---------- HUD ---------- */
+#hud {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  width: 270px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(10, 16, 32, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-size: 13px;
+  line-height: 1.5;
+  user-select: none;
+  transition: opacity 0.3s;
+}
+#hud.hidden { opacity: 0; pointer-events: none; }
+#hud .title { font-weight: 600; font-size: 15px; margin-bottom: 8px; color: #ffe08a; }
+#hud .row { display: flex; justify-content: space-between; gap: 12px; }
+#hud .row span { color: #8f9ab3; }
+#hud .row b { font-weight: 500; text-align: right; }
+#hud .help { margin: 10px 0 0; padding: 10px 0 0; border-top: 1px solid rgba(255, 255, 255, 0.08); list-style: none; color: #b8c2d8; font-size: 12px; }
+#hud .help li { margin: 2px 0; }
+#hud .help.mouse { color: #7f8aa3; }
+
+/* ---------- camera preview ---------- */
+#cam {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  width: 240px;
+  aspect-ratio: 4 / 3;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #000;
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+#cam.on { opacity: 0.85; }
+#cam video, #cam canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1); /* mirror so it feels like a mirror */
+}
+
+/* ---------- hand cursor ---------- */
+#cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 28px;
+  height: 28px;
+  margin: -14px 0 0 -14px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 224, 138, 0.9);
+  box-shadow: 0 0 12px rgba(255, 210, 110, 0.6);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s, background 0.15s, width 0.15s, height 0.15s, margin 0.15s;
+  will-change: transform;
+}
+#cursor.visible { opacity: 1; }
+#cursor.hover { width: 40px; height: 40px; margin: -20px 0 0 -20px; }
+#cursor.pinch { background: rgba(255, 224, 138, 0.55); }
+
+/* ---------- status pill ---------- */
+#status {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  max-width: calc(100% - 32px);
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(10, 16, 32, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 13px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+#status.visible { opacity: 1; }
+#status.error { border-color: rgba(255, 120, 120, 0.4); color: #ffc9c9; border-radius: 14px; }
+
+@media (max-width: 640px) {
+  #hud { width: auto; right: 16px; font-size: 12px; }
+  #hud .help { display: none; }
+  #cam { width: 140px; bottom: 72px; }
+}

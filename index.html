@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>粒子圣诞树</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <canvas id="scene"></canvas>
+  <div id="cursor"></div>
+
+  <div id="hud">
+    <div class="title">✨ Particle Christmas</div>
+    <div class="row"><span>手势</span><b id="gesture">—</b></div>
+    <div class="row"><span>状态</span><b id="mode">圣诞树</b></div>
+    <div class="row"><span>照片</span><b id="photo-count">—</b></div>
+    <div class="row"><span>FPS</span><b id="fps">—</b></div>
+    <ul class="help">
+      <li>✊ 握拳：粒子聚合成树</li>
+      <li>✋ 张开手掌：粒子散开</li>
+      <li>✋ 张开或握拳时左右挥动：旋转</li>
+      <li>☝️ 食指：移动光标指向照片</li>
+      <li>🤏 捏合一次：打开照片，再捏合一次：退出</li>
+    </ul>
+    <div class="help mouse">鼠标：拖拽旋转 · 点击打开 / 退出照片<br>空格 切换散开 · Esc 退出照片 · H 隐藏面板</div>
+  </div>
+
+  <div id="cam">
+    <video id="video" playsinline muted></video>
+    <canvas id="overlay"></canvas>
+  </div>
+
+  <div id="status"></div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
